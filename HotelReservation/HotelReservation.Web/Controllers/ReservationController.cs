@@ -47,8 +47,13 @@ namespace HotelReservation.Web.Controllers
         public IActionResult Post([FromBody] Reservation reservation)
         {
             if (reservation == null) return BadRequest();
-            if (reservation.BeginDate < DateTime.Now.AddDays(1)) return BadRequest("Invalid begin date");
-            return Ok(_reservationService.Create(reservation));
+            //if (reservation.BeginDate < DateTime.Now.AddDays(1)) return BadRequest("Invalid begin date");
+            var myRet = _reservationService.Create(reservation);
+            if (!string.IsNullOrEmpty(myRet.Status))
+            {
+                return BadRequest(myRet.Status);
+            }
+            return Ok(myRet);
         }
 
         [HttpPut]
@@ -59,7 +64,12 @@ namespace HotelReservation.Web.Controllers
         {
             if (reservation == null) return BadRequest();
             if (reservation.BeginDate < DateTime.Now.AddDays(1)) return BadRequest("Invalid begin date");
-            return Ok(_reservationService.Update(reservation));
+            var myRet = _reservationService.Update(reservation);
+            if (!string.IsNullOrEmpty(myRet.Status))
+            {
+                return BadRequest(myRet.Status);
+            }
+            return Ok(myRet);
         }
 
         [HttpDelete("{id}")]

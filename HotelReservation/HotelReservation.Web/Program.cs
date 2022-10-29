@@ -11,11 +11,15 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddRazorPages();
+builder.Services.AddRazorPages();
+//builder.Services.AddMvc().AddRazorPagesOptions(opt => {
+//    opt.RootDirectory = "/pg";
+//});
+builder.Services.AddMvc();
+builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
-builder.Services.AddMvc();
-builder.Services.AddMvcCore();
+//builder.Services.AddMvcCore();
 
 // Enabling API Versioning
 builder.Services.AddApiVersioning();
@@ -65,10 +69,7 @@ builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
-builder.Services.AddMvc();
-
 var app = builder.Build();
-
 
 if (app.Environment.IsDevelopment())
 {
@@ -79,6 +80,7 @@ if (app.Environment.IsDevelopment())
         myCtx.Database.EnsureCreated();
     }
 }
+app.UseStaticFiles();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -96,13 +98,23 @@ app.UseRewriter(option);
 //    endpoints.MapControllers();
 //    endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
 //});
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapRazorPages();
+//    //endpoints.MapControllerRoute(
+//    //    name: "default",
+//    //    pattern: "{controller=Hotel}/{action=Index}/{id?}");
+//});
+
 app.MapControllers();
-app.UseStaticFiles();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.UseRouting();
 
 app.UseAuthorization();
 
-//app.MapRazorPages();
+app.MapRazorPages();
 
 app.Run();

@@ -69,6 +69,11 @@ namespace Api.Repository.Context
             modelBuilder.Entity<Reservation>().ToTable("reservation");
             modelBuilder.Entity<Reservation>().HasKey(p => p.Id);
             modelBuilder.Entity<Reservation>().Property(p => p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Reservation>().Property(p => p.HotelId).IsRequired(); //.HasMaxLength(50);
+            modelBuilder.Entity<Reservation>().Property(p => p.RoomId).IsRequired();
+            modelBuilder.Entity<Reservation>().Property(p => p.CustomerName).IsRequired().HasMaxLength(100);
+            modelBuilder.Entity<Reservation>().Property(p => p.ReservedDays).IsRequired();
+            modelBuilder.Entity<Reservation>().Property(p => p.BeginDate).IsRequired();
 
             base.OnModelCreating(modelBuilder);
         }

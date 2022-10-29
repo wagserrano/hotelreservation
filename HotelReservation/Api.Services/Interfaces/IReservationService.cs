@@ -14,5 +14,6 @@ namespace Api.Services.Interfaces
         Reservation FindById(int id);
         List<Reservation> FindAll();
         void Delete(int id);
+        Reservation ValidDates(Reservation reservation);
     }
 }

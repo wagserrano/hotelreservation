@@ -40,7 +40,7 @@ namespace HotelReservation.Web.Controllers
             return Ok(hotel);
         }
 
-        [HttpGet("checkallavailable")]
+        [HttpGet("checkdatesbusy")]
         [ProducesResponseType((200), Type = typeof(Hotel))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
