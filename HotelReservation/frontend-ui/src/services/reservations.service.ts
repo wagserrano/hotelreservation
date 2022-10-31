@@ -13,12 +13,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ReservationsService {
-  url:string = "api/Reservation/v1";
+  // url:string = "api/Reservation/v1";
+  url:string = 'http://localhost:5007/api/Reservation/v1';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    //debugger;
+  }
 
   GetAll() : Observable<Reservation[]>{
-        return this.http.get<Reservation[]>(this.url+'/allreservations');
+    console.warn('GetAll ' + this.url+'/allreservations');
+    return this.http.get<Reservation[]>(this.url+'/allreservations');
   }
 
   GetById(reservationId: number) : Observable<Reservation>{

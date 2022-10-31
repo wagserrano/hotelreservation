@@ -16,12 +16,14 @@ export class ListReservationsComponent implements OnInit{
     ngOnInit(): void {
         console.warn("list-reservations OnInit...");
         this.reservationsService.GetAll().subscribe(resultOne => {
-            this.reservations.data = resultOne;            
+            this.reservations.data = resultOne,
+            console.warn('resultOne ', resultOne)
+            ;            
         })
         this.displayColumns = this.ShowColumns();
     }
 
     ShowColumns(): string[]{
-        return [ 'Id', 'hotelId', 'roomId', 'customerName', 'reservedDays', 'beginDate']
+        return [ 'Id', 'hotelId', 'roomId', 'customerName', 'reservedDays', 'beginDate', 'endDate' ]
     }
 }

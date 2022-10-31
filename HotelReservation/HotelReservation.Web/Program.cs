@@ -41,6 +41,17 @@ builder.Services.AddSwaggerGen(c => {
         });
     });
 
+//builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+//{
+//    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+//}));
+
+// Enable CORS
+builder.Services.AddCors(policyBuilder =>
+    policyBuilder.AddDefaultPolicy(policy =>
+        policy.WithOrigins("*").AllowAnyHeader().AllowAnyHeader())
+);
+
 // Enabling AutoMapper
 var configMap = new MapperConfiguration(cfg =>
 {
@@ -70,6 +81,8 @@ builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
+
+app.UseCors();
 
 if (app.Environment.IsDevelopment())
 {

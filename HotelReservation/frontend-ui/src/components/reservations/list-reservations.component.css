@@ -1,0 +1,15 @@
+.tableone{
+    width: 100%;
+    padding-top: 20px;
+    border-spacing: 20px;
+    border-collapse: separate;
+}
+.dataReservations{
+    padding: 30px 30px 30px 30px;
+}
+.tableone{
+    padding-left: 5px;
+}
+.headColsOne{
+    border-spacing: 30px;
+}
