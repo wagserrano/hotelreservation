@@ -1,0 +1,40 @@
+<div class="dataReservations">
+    <mat-table #table [datasource]="reservations" class="mat-elevation-z8 tableone">
+        // 'Id', 'hotelId', 'roomId', 'customerName', 'reservedDays', 'beginDate'
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef>Id Reservation</th>
+            <!-- <td mat-cell *matCellDef="let reservation"> {{ reservation.Id }}</td> -->
+            <td mat-cell *matCellDef="let reservation"> <mat-icon> {{ reservation.Id }} </mat-icon> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hotelId">
+            <th mat-header-cell *matHeaderCellDef>Hotel Id</th>
+            <td mat-cell *matCellDef="let reservation"> {{ reservation.hotelId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="roomId">
+            <th mat-header-cell *matHeaderCellDef>Room Id</th>
+            <td mat-cell *matCellDef="let reservation"> {{ reservation.roomId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+            <td mat-cell *matCellDef="let reservation"> {{ reservation.customerName }}</td>
+        </ng-container>        
+
+        <ng-container matColumnDef="reservedDays">
+            <th mat-header-cell *matHeaderCellDef>Reserved Days</th>
+            <td mat-cell *matCellDef="let reservation"> {{ reservation.reservedDays}}</td>
+        </ng-container>     
+
+        <ng-container matColumnDef="beginDate">
+            <th mat-header-cell *matHeaderCellDef>Begin Date</th>
+            <td mat-cell *matCellDef="let reservation"> {{ reservation.beginDate}}</td>
+            <button mat-mini-fab color="primary"><mat-icon>edit </mat-icon></button>
+            <button mat-mini-fab color="warn"><mat-icon>delete </mat-icon></button>
+        </ng-container> 
+        
+        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+        <tr mat-row *matRowDef="let row;columns: displayColumns"></tr>
+    </mat-table>
+</div>
